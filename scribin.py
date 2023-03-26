@@ -9,8 +9,10 @@ model = whisper.load_model("medium.en")
 # path to the audio file you want to transcribe
 audio = "cold.webm"
 cut_audio = audio.rsplit('.', 1)[0]
-file_name = f'{dt_string}-cut_audio.txt'
+file_name = f'{dt_string}-{cut_audio}.txt'
 result = model.transcribe(audio, fp16=False)
 
 with open(file_name, 'a') as f:
+    f.write(f'{cut_audio}\n')
     f.write(result["text"])
+
